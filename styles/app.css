@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+
+@layer components {
+  .modal {
+    @apply overflow-y-auto overflow-x-hidden fixed inset-x-0 top-full z-50 justify-center items-center h-screen w-screen antialiased text-slate-200 bg-slate-900 transition-[top] duration-300;
+  }
+}
+
+@tailwind utilities;
