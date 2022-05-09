@@ -1,5 +1,5 @@
 const CHARACTER_STATUS = {
-  0: "animate-flipX bg-stone-600 border-stone-500", // failed
+  0: "animate-flipX bg-zinc-800 border-zinc-900", // failed
   1: "animate-flipX bg-amber-500 border-amber-400", // incorrect position
   2: "animate-flipX bg-lime-700 border-lime-600", // correct position
 };
