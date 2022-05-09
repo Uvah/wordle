@@ -80,8 +80,18 @@ export default function Index() {
   const { actionData, setActionData }: WORDLE.AppContext =
     React.useContext(context);
 
-  const { gameData, takeInput, makeAttempt, undoInput, statsData, startNewGame } =
-    useWordle(WORD_LENGTH);
+  const [gameDimension, setGameDimension] = React.useState({
+    width: 0,
+    height: 0,
+  });
+  const {
+    gameData,
+    takeInput,
+    makeAttempt,
+    undoInput,
+    statsData,
+    startNewGame,
+  } = useWordle(WORD_LENGTH);
 
   const hideHelp = React.useCallback(() => {
     setActionData("help", false);
@@ -116,6 +126,26 @@ export default function Index() {
   }, [makeAttempt]);
 
   React.useEffect(() => {
+    function handleResize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const extras = 56 + 194; // header + keyboard;
+      const newHeight = height - extras;
+      const ratio = (MAX_TRIES / WORD_LENGTH);
+      const newWidth = newHeight / ratio;
+      setGameDimension({
+        height: newHeight,
+        width: width < newWidth ? width - 20 : newWidth,
+      });
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setGameDimension]);
+
+  React.useEffect(() => {
     if (isGameOver(gameData?.wordList)) {
       setActionData("stats", true);
     }
@@ -131,12 +161,25 @@ export default function Index() {
 
   return (
     <>
-      <div className="container m-auto w-full flex items-center justify-center h-[calc(100%-12rem)] flex-col">
-        <GameBoard wordData={gameData.wordList} wordLength={WORD_LENGTH} />
+      <div className="container m-auto w-full flex items-center justify-around h-full lg:h-auto select-none flex-col">
+        <GameBoard
+          wordData={gameData.wordList}
+          wordLength={WORD_LENGTH}
+          style={
+            gameDimension.height
+              ? { height: gameDimension.height, width: gameDimension.width }
+              : {}
+          }
+        />
         <Keyboard state={gameData.keyboardState} />
       </div>
       <Help show={actionData.help} onHide={hideHelp} />
-      <Stats show={actionData.stats} data={statsData} onHide={hideStats} startNewGame={startNewGame} />
+      <Stats
+        show={actionData.stats}
+        data={statsData}
+        onHide={hideStats}
+        startNewGame={startNewGame}
+      />
     </>
   );
 }

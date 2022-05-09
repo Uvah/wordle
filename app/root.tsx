@@ -84,7 +84,7 @@ export default function App() {
           }}
         >
           <Header setData={updateActionData} />
-          <main className="mt-16 max-w-7xl mx-auto h-[calc(100vh-4rem)]">
+          <main className="mt-11 sm:mt-14 max-w-7xl mx-auto h-[calc(100vh-4rem)]">
             <Outlet />
           </main>
         </Context.Provider>
