@@ -1,7 +1,7 @@
 import { FaBackspace } from "@react-icons/all-files/fa/FaBackspace";
 
 const CHARACTER_STATUS = {
-  0: "bg-stone-600 border-stone-500", // failed
+  0: "bg-zinc-800 border-zinc-900", // failed
   1: "bg-amber-500 border-amber-400", // incorrect position
   2: "bg-lime-700 border-lime-600", // correct position
 };

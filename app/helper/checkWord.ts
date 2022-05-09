@@ -26,7 +26,7 @@ export default function checkWord(
       const position = temp.indexOf(given[index]);
       if (position > -1) {
         result[index] = CHARACTER_STATUS.INCORRECT_POSITION;
-        temp[index] = "-1"; // invalid character
+        temp[position] = "-1"; // invalid character
       }
     }
   }
