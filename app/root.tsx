@@ -8,10 +8,12 @@ import {
   ScrollRestoration,
 } from "remix";
 import type { MetaFunction } from "remix";
+import toastifyStyle from "react-toastify/dist/ReactToastify.css";
 
 import styles from "./app.css";
-import toastifyStyle from "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
+import Context from "~/context";
+import React from "react";
 
 export const meta: MetaFunction = () => {
   return { title: "Wordle by UVAH" };
@@ -25,6 +27,15 @@ export function links() {
 }
 
 export default function App() {
+  const [headerActionData, setActionData] = React.useState({
+    help: false,
+    stats: false,
+  });
+
+  const updateActionData = React.useCallback((key, value) => {
+    setActionData((data) => ({ ...data, [key]: value }));
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -61,10 +72,17 @@ export default function App() {
         </div>
       </noscript>
       <body className="bg-purple-900 text-white font-Raleway overflow-hidden">
-        <Header />
-        <main className="mt-16 max-w-7xl mx-auto h-[calc(100vh-4rem)]">
-          <Outlet />
-        </main>
+        <Context.Provider
+          value={{
+            actionData: headerActionData,
+            setActionData: updateActionData,
+          }}
+        >
+          <Header setData={updateActionData} />
+          <main className="mt-16 max-w-7xl mx-auto h-[calc(100vh-4rem)]">
+            <Outlet />
+          </main>
+        </Context.Provider>
         <ToastContainer
           position="top-center"
           autoClose={2500}
@@ -75,7 +93,6 @@ export default function App() {
           transition={Slide}
           draggable
           limit={2}
-          pauseOnHover
         />
         <ScrollRestoration />
         <Scripts />

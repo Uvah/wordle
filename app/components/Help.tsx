@@ -29,6 +29,7 @@ export default function Help({
       };
     }
   }, [onHide, show]);
+
   return (
     <div
       ref={(ref) => {
