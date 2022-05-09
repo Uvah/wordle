@@ -34,6 +34,7 @@ export default function App() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <Meta />
+        <link rel="icon" type="image/png" href="/assets/logo.svg"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link
           rel="preconnect"
@@ -46,6 +47,19 @@ export default function App() {
         ></link>
         <Links />
       </head>
+      <noscript>
+        <style
+          type="text/css"
+          dangerouslySetInnerHTML={{
+            __html: `
+          main, header { display: none; }
+        `,
+          }}
+        ></style>
+        <div className="flex justify-center items-center h-screen w-screen">
+          You don't have javascript enabled. Please enable javascript to play
+        </div>
+      </noscript>
       <body className="bg-purple-900 text-white font-Raleway overflow-hidden">
         <Header />
         <main className="mt-16 max-w-7xl mx-auto h-[calc(100vh-4rem)]">

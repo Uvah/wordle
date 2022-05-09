@@ -1,9 +1,38 @@
 import { FaQuestion } from "@react-icons/all-files/fa/FaQuestion";
 import React from "react";
 import Help from "./Help";
+
+const SHOW_HELP_KEY = "userKnowHowToPlay";
+
 export default function Header() {
-  // TODO only first time user
-  const [showHelp, setHelpState] = React.useState(true);
+  const [showHelp, setHelpState] = React.useState(false);
+
+  const hideHelp = React.useCallback(() => {
+    setHelpState(false);
+    localStorage.setItem(SHOW_HELP_KEY, "true");
+  }, []);
+
+  React.useEffect(() => {
+    if (localStorage.getItem(SHOW_HELP_KEY)) {
+      hideHelp();
+    } else {
+      setHelpState(true);
+    }
+  }, [hideHelp]);
+
+  React.useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const key = e.key.toLowerCase();
+      if (key === "escape") {
+        hideHelp();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [hideHelp]);
+
   return (
     <>
       <header className="h-11 sm:h-16 py-2 px-6 fixed w-screen top-0 shadow-sm shadow-purple-800">
@@ -22,7 +51,7 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <Help show={showHelp} onHide={() => setHelpState(false)} />
+      <Help show={showHelp} onHide={hideHelp} />
     </>
   );
 }

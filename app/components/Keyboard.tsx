@@ -39,7 +39,7 @@ export default function Keyboard() {
                 }}
                 key={`keyboard-${rowIndex}-${key}`}
                 type="button"
-                className="bg-purple-800 shadow-lg uppercase h-12 sm:h-14 sm:min-w-[2.5rem] cursor-pointer rounded-sm flex items-center justify-center m-1 text-sm flex-1 select-none"
+                className="bg-purple-800 shadow-lg uppercase h-12 sm:h-14 sm:min-w-[2.5rem] cursor-pointer rounded-sm flex items-center justify-center m-1 text-xs sm:text-sm flex-1 select-none px-1"
               >
                 {key}
               </button>

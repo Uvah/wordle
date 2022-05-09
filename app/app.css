@@ -634,6 +634,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: table;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-\[calc\(100vh-4rem\)\] {
   height: calc(100vh - 4rem);
 }
@@ -658,12 +662,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: calc(100% - 12rem);
 }
 
-.w-\[85\%\] {
-  width: 85%;
-}
-
 .w-screen {
   width: 100vw;
+}
+
+.w-\[85\%\] {
+  width: 85%;
 }
 
 .w-full {
@@ -899,6 +903,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -929,6 +938,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-semibold {
@@ -1012,5 +1026,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
