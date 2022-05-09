@@ -62,6 +62,20 @@ export default function App() {
           rel="stylesheet"
         ></link>
         <Links />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-1NDBFZKPZR"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1NDBFZKPZR');
+            `,
+          }}
+        ></script>
       </head>
       <noscript>
         <style
