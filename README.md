@@ -1,6 +1,7 @@
 # Wordle
 
-Play now at https://wordle.uvah.tech
+<img src="./img.png" />
+
 ## Development
 
 From your terminal:
