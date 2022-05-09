@@ -16,7 +16,11 @@ import Context from "~/context";
 import React from "react";
 
 export const meta: MetaFunction = () => {
-  return { title: "Wordle by UVAH" };
+  return {
+    title: "Wordle by UVAH",
+    description: "Guess the hidden word in 6 tries.",
+    "og:title": "Wordle - A word game",
+  };
 };
 
 export function links() {
@@ -45,6 +49,7 @@ export default function App() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <Meta />
+        <link rel="manifest" href="manifest.json" />
         <link rel="icon" type="image/png" href="/assets/logo.svg"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link

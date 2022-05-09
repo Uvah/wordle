@@ -13,7 +13,15 @@ export default function Header({
             <img className="h-full" src="/assets/logo.svg" alt="Uvah.tech" />
           </div>
           <div className="text-2xl sm:text-4xl">
-            Wordle <span className="text-[10px]">by UVAH</span>
+            Wordle{" "}
+            <a
+              href="https://uvah.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px]"
+            >
+              by UVAH
+            </a>
           </div>
           <div className="flex">
             <svg
