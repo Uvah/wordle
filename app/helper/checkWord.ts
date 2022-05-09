@@ -1,9 +1,5 @@
+import { CHARACTER_STATUS } from "~/constant";
 import wordList from "~/data/wordList";
-enum CHARACTER_STATUS {
-  INCORRECT,
-  INCORRECT_POSITION,
-  CORRECT,
-}
 
 export default function checkWord(
   given: string,

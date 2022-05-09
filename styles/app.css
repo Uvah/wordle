@@ -9,6 +9,9 @@
   .character {
     @apply uppercase border border-purple-800 w-full min-h-[2rem] aspect-square sm:max-w-[4rem] flex justify-center items-center text-3xl font-semibold m-1 select-none;
   }
+  .keyboard-key {
+    @apply bg-purple-800 shadow-lg uppercase h-12 sm:h-14 sm:min-w-[2.5rem] cursor-pointer rounded-sm flex items-center justify-center m-1 text-xs sm:text-sm flex-1 select-none px-1;
+  }
 }
 
 @tailwind utilities;

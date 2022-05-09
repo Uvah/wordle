@@ -1,6 +1,15 @@
 declare namespace WORDLE {
   export interface wordList {
     word: string;
-    result?: number[] | boolean;
+    result?: number[];
+  }
+
+  export interface keyBoardState {
+    [char: string]: number;
+  }
+
+  export interface AppOutput {
+    wordList: wordList[];
+    keyboardState: keyBoardState;
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { useFetcher } from "remix";
+import computeKeyboardState from "~/helper/computeKeyboardState";
 
 export const MAX_TRIES = 6;
 
@@ -24,10 +25,12 @@ export default function useWordle(wordLength = 5) {
   /**
    * OUTPUT list exposed outside
    */
-  const [output, setOutput] = React.useState<
-    Array<WORDLE.wordList & { keyboard?: { [char: string]: number } }>
-  >([]);
+  const [output, setOutput] = React.useState<WORDLE.AppOutput>({
+    wordList: [],
+    keyboardState: {},
+  });
 
+  /** read localstorage to prefill old user tries */
   React.useEffect(() => {
     try {
       if (localStorage.getItem(USER_TRIES_LIST)) {
@@ -41,16 +44,20 @@ export default function useWordle(wordLength = 5) {
     }
   }, []);
 
+  /** prepare output data format consumed by app */
   React.useEffect(() => {
     const out = [...userAttemptList, { word: activeInput }];
     if (out.length < MAX_TRIES) {
       out.push(
         ...[...new Array(MAX_TRIES - out.length)].map(() => ({ word: "" }))
       );
-    } else {
+    } else if (out.length > MAX_TRIES) {
       setGameState(GAME_STATE.OVER);
     }
-    setOutput(out.slice(0, MAX_TRIES));
+    setOutput({
+      wordList: out.slice(0, MAX_TRIES),
+      keyboardState: computeKeyboardState(out.slice(0, MAX_TRIES)),
+    });
     localStorage.setItem(USER_TRIES_LIST, JSON.stringify(userAttemptList));
   }, [activeInput, userAttemptList]);
 
@@ -127,14 +134,10 @@ export default function useWordle(wordLength = 5) {
     setInput((word) => word.slice(0, word.length - 1));
   }, []);
 
-  React.useEffect(() => {
-    console.info(activeInput);
-  }, [activeInput]);
-
   return {
     takeInput,
     makeAttempt,
     undoInput,
-    inputData: output,
+    gameData: output,
   };
 }

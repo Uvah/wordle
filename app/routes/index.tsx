@@ -46,7 +46,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const { inputData, takeInput, makeAttempt, undoInput } =
+  const { gameData, takeInput, makeAttempt, undoInput } =
     useWordle(WORD_LENGTH);
   React.useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -69,8 +69,8 @@ export default function Index() {
   }, [makeAttempt]);
   return (
     <div className="container m-auto w-full flex items-center justify-center h-[calc(100%-12rem)] flex-col">
-      <GameBoard inputData={inputData} wordLength={WORD_LENGTH} />
-      <Keyboard />
+      <GameBoard wordData={gameData.wordList} wordLength={WORD_LENGTH} />
+      <Keyboard state={gameData.keyboardState} />
     </div>
   );
 }

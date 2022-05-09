@@ -1,5 +1,11 @@
 import { FaBackspace } from "@react-icons/all-files/fa/FaBackspace";
 
+const CHARACTER_STATUS = {
+  0: "bg-stone-600 border-stone-500", // failed
+  1: "bg-amber-500 border-amber-400", // incorrect position
+  2: "bg-lime-700 border-lime-600", // correct position
+};
+
 const keyboardKeys = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -15,7 +21,11 @@ const keyboardKeys = [
     <FaBackspace className="text-lg sm:mx-3" />,
   ],
 ];
-export default function Keyboard() {
+export default function Keyboard({
+  state = {},
+}: {
+  state: WORDLE.keyBoardState;
+}) {
   return (
     <div className="h-44 sm:h-48 w-full max-w-xl fixed bottom-0" id="keyboard">
       {keyboardKeys.map((rowKeys, rowIndex) => (
@@ -26,6 +36,13 @@ export default function Keyboard() {
           }`}
         >
           {rowKeys.map((key) => {
+            let stateClass: string = "";
+            if (typeof key === "string") {
+              stateClass =
+                CHARACTER_STATUS[
+                  state[key.toUpperCase()] as keyof typeof CHARACTER_STATUS
+                ] || "";
+            }
             return (
               <button
                 onClick={() => {
@@ -39,7 +56,7 @@ export default function Keyboard() {
                 }}
                 key={`keyboard-${rowIndex}-${key}`}
                 type="button"
-                className="bg-purple-800 shadow-lg uppercase h-12 sm:h-14 sm:min-w-[2.5rem] cursor-pointer rounded-sm flex items-center justify-center m-1 text-xs sm:text-sm flex-1 select-none px-1"
+                className={`keyboard-key ${stateClass}`}
               >
                 {key}
               </button>
