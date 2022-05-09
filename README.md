@@ -2,6 +2,7 @@
 
 <img src="./img.png" />
 
+CodeSandbox Link: https://codesandbox.io/s/elegant-bardeen-ojdwp7
 ## Development
 
 From your terminal:
