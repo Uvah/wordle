@@ -7,10 +7,12 @@ import {
   SUCCESS_MESSAGE,
   USER_TRIES_LIST,
 } from "~/constant";
+import context from "~/context";
 import computeKeyboardState from "~/helper/computeKeyboardState";
 import isGameOver from "~/helper/isGameOver";
 
 export default function useWordle(wordLength = 5) {
+  const { setActionData } = React.useContext(context);
   const submitAttempt = useFetcher();
   const newGameAction = useFetcher();
   const [statsData, setStatsData] = React.useState<WORDLE.UserStats>();
@@ -88,6 +90,7 @@ export default function useWordle(wordLength = 5) {
     updateList([]);
     setGameState(GAME_STATE.INIT);
     setInput("");
+    setActionData("stats", false);
   }, []);
 
   React.useEffect(() => {

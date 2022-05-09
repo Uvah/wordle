@@ -45,19 +45,19 @@ export default function Stats({
   React.useEffect(() => {
     setData([
       {
-        value: data?.gamesPlayed || 0 as number,
+        value: data?.gamesPlayed || 0,
         label: "Played",
       },
       {
-        value: data?.winPercentage || 0 as number,
+        value: data?.winPercentage || 0,
         label: "Win %",
       },
       {
-        value: data?.currentStreak || 0 as number,
+        value: data?.currentStreak || 0,
         label: "Current Streak",
       },
       {
-        value: data?.maxStreak || 0 as number,
+        value: data?.maxStreak || 0,
         label: "Max Streak",
       },
     ]);
@@ -129,9 +129,11 @@ export default function Stats({
         </div>
         <div className="mt-2">
           <button
+            type="button"
             onClick={() => {
-              startNewGame();
-              onHide();
+              if (show) {
+                startNewGame();
+              }
             }}
             className="bg-purple-700 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded"
           >
