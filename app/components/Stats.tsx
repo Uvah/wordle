@@ -45,19 +45,19 @@ export default function Stats({
   React.useEffect(() => {
     setData([
       {
-        value: data?.gamesPlayed as number,
+        value: data?.gamesPlayed || 0 as number,
         label: "Played",
       },
       {
-        value: data?.winPercentage as number,
+        value: data?.winPercentage || 0 as number,
         label: "Win %",
       },
       {
-        value: data?.currentStreak as number,
+        value: data?.currentStreak || 0 as number,
         label: "Current Streak",
       },
       {
-        value: data?.maxStreak as number,
+        value: data?.maxStreak || 0 as number,
         label: "Max Streak",
       },
     ]);
@@ -99,7 +99,7 @@ export default function Stats({
         />
       </div>
       <div className="flex flex-col items-center">
-        <div className="flex w-2/3 my-4">
+        <div className="flex w-full justify-center sm:w-2/3 my-4">
           {statsData.map((stats) => (
             <div className="flex flex-col items-center mx-2 text-center">
               <div className="text-2xl font-semibold">{stats.value}</div>
