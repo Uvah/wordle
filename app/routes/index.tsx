@@ -6,11 +6,23 @@ import useWordle from "~/hook/useWordle";
 const WORD_LENGTH = 5;
 
 export default function Index() {
-  const { inputData, takeInput, makeAttempt, undoInput } = useWordle(WORD_LENGTH);
+  const { inputData, takeInput, makeAttempt, undoInput } =
+    useWordle(WORD_LENGTH);
   React.useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const key = e.key.toLowerCase();
-
+      if (
+        e.altKey ||
+        e.ctrlKey ||
+        e.metaKey ||
+        e.shiftKey ||
+        e.key === "Meta" ||
+        e.key === "Shift" ||
+        e.key === "Control" ||
+        e.key === "alt"
+      ) {
+        return;
+      }
       if (key.length === 1 && key >= "a" && key <= "z") {
         takeInput(e.key);
       } else if (key === "enter") {

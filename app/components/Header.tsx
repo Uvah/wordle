@@ -2,7 +2,8 @@ import { FaQuestion } from "@react-icons/all-files/fa/FaQuestion";
 import React from "react";
 import Help from "./Help";
 export default function Header() {
-  const [showHelp, setHelpState] = React.useState(false);
+  // TODO only first time user
+  const [showHelp, setHelpState] = React.useState(true);
   return (
     <>
       <header className="h-11 sm:h-16 py-2 px-6 fixed w-screen top-0 shadow-sm shadow-purple-800">

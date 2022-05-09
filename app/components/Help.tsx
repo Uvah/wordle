@@ -1,4 +1,5 @@
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
+import React from "react";
 import Word from "./Word";
 
 export default function Help({
@@ -8,14 +9,38 @@ export default function Help({
   show: boolean;
   onHide?: () => void;
 }) {
-  console.log("show", show);
+  const divRef = React.useRef<HTMLDivElement | null>();
+  React.useEffect(() => {
+    if (typeof onHide === "function") {
+      function handleOutsideClick(event: MouseEvent) {
+        const modalRef = divRef.current;
+        if (
+          show &&
+          event.target !== modalRef &&
+          !modalRef?.contains(event.target as Node) &&
+          onHide
+        ) {
+          onHide();
+        }
+      }
+      document.addEventListener("click", handleOutsideClick);
+      return () => {
+        document.removeEventListener("click", handleOutsideClick);
+      };
+    }
+  }, [onHide, show]);
   return (
-    <div className={`modal ${show ? "top-0" : ""} p-2 px-4`}>
+    <div
+      ref={(ref) => {
+        divRef.current = ref;
+      }}
+      className={`modal ${show ? "top-0 bottom-0" : ""} p-2 px-4`}
+    >
       <div className="flex justify-between">
         <div></div>
         <div className="text-xl font-semibold uppercase">How To Play</div>
         <FaTimes
-          className="text-2xl"
+          className="text-2xl cursor-pointer"
           onClick={() => {
             if (typeof onHide === "function") onHide();
           }}

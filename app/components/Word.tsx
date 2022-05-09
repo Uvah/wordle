@@ -1,7 +1,7 @@
 const CHARACTER_STATUS = {
-  0: "bg-stone-600 border-stone-500", // failed
-  1: "bg-amber-500 border-amber-400", // incorrect position
-  2: "bg-lime-700 border-lime-600", // correct position
+  0: "animate-flipX bg-stone-600 border-stone-500", // failed
+  1: "animate-flipX bg-amber-500 border-amber-400", // incorrect position
+  2: "animate-flipX bg-lime-700 border-lime-600", // correct position
 };
 export default function Word({
   wordData,
@@ -17,21 +17,26 @@ export default function Word({
     <div className="flex justify-start flex-nowrap w-full">
       {[...word, ...Array(wordLength)]
         .slice(0, wordLength)
-        .map((char, charKey) => (
-          <div
-            key={`${id}-char-${charKey}`}
-            className={`uppercase border border-purple-800 w-full min-h-[2rem] aspect-square sm:max-w-[4rem] flex justify-center items-center text-3xl font-semibold m-1 select-none ${
-              char ? "animate-pulse border-purple-300" : ""
-            } ${
-              Array.isArray(result) &&
-              CHARACTER_STATUS[
+        .map((char, charKey) => {
+          const resultClass = Array.isArray(result)
+            ? CHARACTER_STATUS[
                 (result[charKey] || 0) as keyof typeof CHARACTER_STATUS
               ]
-            }`}
-          >
-            {char}
-          </div>
-        ))}
+            : "";
+          return (
+            <div
+              key={`${id}-char-${charKey}`}
+              style={{
+                animationDelay: resultClass ? `${charKey * 0.2}s` : "0",
+              }}
+              className={`character ${
+                char && !resultClass ? "animate-pulse border-purple-300" : ""
+              } ${resultClass ? resultClass : ""}`}
+            >
+              {char}
+            </div>
+          );
+        })}
     </div>
   );
 }
